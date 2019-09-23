@@ -1,16 +1,41 @@
 <template>
   <div class="slider-wrapper">
-
     <div class="slider" ref="slider">
       <slot></slot>
     </div>
 
     <div class="controls" v-if="showControls">
       <button class="controls__prev" @click="prevSlide">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="feather feather-chevron-left"
+        >
+          <polyline points="15 18 9 12 15 6" />
+        </svg>
       </button>
       <button class="controls__next" @click="nextSlide">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="feather feather-chevron-right"
+        >
+          <polyline points="9 18 15 12 9 6" />
+        </svg>
       </button>
     </div>
 
@@ -21,9 +46,7 @@
         :key="`slide-${index}`"
         @click="scrollTo(index)"
         :class="index === activeSlideIndex ? 'indicator__button--active' : ''"
-      >
-        {{ slideNumber }}
-      </button>
+      >{{ slideNumber }}</button>
     </div>
   </div>
 </template>
@@ -43,57 +66,58 @@ export default {
   data() {
     return {
       numSlides: 0,
-      activeSlideIndex: 0,
-    }
+      activeSlideIndex: 0
+    };
   },
   methods: {
     handleScroll() {
-      const {
-        scrollLeft,
-        scrollWidth
-      } = this.$refs['slider'];
+      const { scrollLeft, scrollWidth } = this.$refs["slider"];
       const slideWidth = scrollWidth / this.numSlides;
 
       this.activeSlideIndex = scrollLeft / slideWidth;
     },
     nextSlide() {
-      this.scrollTo(this.activeSlideIndex + 1)
+      this.scrollTo(this.activeSlideIndex + 1);
     },
     prevSlide() {
-      this.scrollTo(this.activeSlideIndex - 1)
+      this.scrollTo(this.activeSlideIndex - 1);
     },
     scrollTo(index) {
-      console.log("Scrollto", index)
-      const scrollLeft = Math.floor(this.$refs["slider"].scrollWidth * (index / this.numSlides))
+      console.log("Scrollto", index);
+      const scrollLeft = Math.floor(
+        this.$refs["slider"].scrollWidth * (index / this.numSlides)
+      );
       this.$refs["slider"].scrollTo({
         left: scrollLeft,
         behaviour: "smooth"
-      })
+      });
     },
-    debounce (fn, delay) {
-      let timeout
-	    return () => {
-		    clearTimeout(timeout)
-		    timeout = setTimeout(() => {
-			    timeout = null
-          fn()
-		    }, delay)
-	    }
+    debounce(fn, delay) {
+      let timeout;
+      return () => {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+          timeout = null;
+          fn();
+        }, delay);
+      };
     }
   },
   mounted() {
     this.handleDebouncedScroll = this.debounce(this.handleScroll, 100);
-    this.$refs["slider"].addEventListener('scroll', this.handleDebouncedScroll)
+    this.$refs["slider"].addEventListener("scroll", this.handleDebouncedScroll);
     console.log("Created", this.$refs["slider"]);
 
     console.log(this.$refs["slider"].children);
-    this.numSlides = this.$refs['slider'].children.length;
-
+    this.numSlides = this.$refs["slider"].children.length;
   },
   beforeDestroy() {
-    this.$refs["slider"].removeEventListener('scroll', this.handleDebouncedScroll);
-  },
-}
+    this.$refs["slider"].removeEventListener(
+      "scroll",
+      this.handleDebouncedScroll
+    );
+  }
+};
 </script>
 
 <style>
