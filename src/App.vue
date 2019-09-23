@@ -4,16 +4,22 @@
       <img alt="Snap Slider Logo" src="./assets/snap-slider-logo.png">
     </header>
 
-    <VueSnapSlider>
+    <VueSnapSlider
+      :showControls="true"
+      :showIndicators="true"
+    >
       <div class="slide">
-        Butz
+        <h1>1</h1>
       </div>
       <div class="slide">
-        Butz 2
+        <h1>2</h1>
       </div>
-      <div class="slide">
-        Butz 2
-      </div>
+
+      <!-- TODO: Implement Custom Controls -->
+      <!-- <template v-slot:controls>
+        <span>Prev</span>
+        <span>Next</span>
+      </template> -->
     </VueSnapSlider>
   </div>
 </template>

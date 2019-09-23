@@ -5,41 +5,43 @@
     </div>
 
     <div class="controls" v-if="showControls">
-      <button class="controls__prev" @click="prevSlide">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="feather feather-chevron-left"
-        >
-          <polyline points="15 18 9 12 15 6" />
-        </svg>
-      </button>
-      <button class="controls__next" @click="nextSlide">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="feather feather-chevron-right"
-        >
-          <polyline points="9 18 15 12 9 6" />
-        </svg>
-      </button>
+      <slot name="controls">
+        <button class="controls__prev" @click="prevSlide">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="feather feather-chevron-left"
+          >
+            <polyline points="15 18 9 12 15 6" />
+          </svg>
+        </button>
+        <button class="controls__next" @click="nextSlide">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="feather feather-chevron-right"
+          >
+            <polyline points="9 18 15 12 9 6" />
+          </svg>
+        </button>
+      </slot>
     </div>
 
-    <div class="indicator">
+    <div class="indicator" v-if="showIndicators">
       <button
         class="indicator__button"
         v-for="(slideNumber, index) in numSlides"
@@ -58,7 +60,7 @@ export default {
       type: Boolean,
       default: true
     },
-    showPagination: {
+    showIndicators: {
       type: Boolean,
       default: true
     }
@@ -151,7 +153,6 @@ export default {
   scroll-snap-stop: normal;
   flex: 100% 0 0;
 }
-
 
 .indicator {
   display: flex;
