@@ -1,12 +1,21 @@
 {
   "name": "vue-snap-slider",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.0.1",
+  "private": false,
+  "main": "./dist/vue-snap-slider.common.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "build-bundle": "vue-cli-service build --target lib --name vue-snap-slider ./src/components/VueSnapSlider.vue",
     "lint": "vue-cli-service lint"
   },
+  "files": [
+    "dist/*",
+    "src/*",
+    "public/*",
+    "*.json",
+    "*.js"
+  ],
   "dependencies": {
     "core-js": "^2.6.5",
     "vue": "^2.6.10"

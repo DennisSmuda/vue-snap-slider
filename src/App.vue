@@ -1,24 +1,31 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <VueSnapSlider>
+      <div class="slide">
+        Butz
+      </div>
+      <div class="slide">
+        Butz 2
+      </div>
+    </VueSnapSlider>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import VueSnapSlider from './components/VueSnapSlider.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    VueSnapSlider
   }
 }
 </script>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
