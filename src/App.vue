@@ -1,9 +1,15 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
+    <header>
+      <img alt="Snap Slider Logo" src="./assets/snap-slider-logo.png">
+    </header>
+
     <VueSnapSlider>
       <div class="slide">
         Butz
+      </div>
+      <div class="slide">
+        Butz 2
       </div>
       <div class="slide">
         Butz 2
@@ -30,6 +36,29 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+
+header {
+  display: flex;
+  height: 7rem;
+}
+
+header img {
+  height: 100%;
+  width: auto;
+}
+
+.slide:nth-child(1),
+.slide:nth-child(4) {
+  background: #e2e2e2;
+}
+
+.slide:nth-child(2),
+.slide:nth-child(5) {
+  background: #c3c3c3;
+}
+
+.slide:nth-child(3) {
+  background: #ababab;
 }
 </style>

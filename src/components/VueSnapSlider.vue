@@ -83,7 +83,6 @@ export default {
       this.scrollTo(this.activeSlideIndex - 1);
     },
     scrollTo(index) {
-      console.log("Scrollto", index);
       const scrollLeft = Math.floor(
         this.$refs["slider"].scrollWidth * (index / this.numSlides)
       );
@@ -106,9 +105,6 @@ export default {
   mounted() {
     this.handleDebouncedScroll = this.debounce(this.handleScroll, 100);
     this.$refs["slider"].addEventListener("scroll", this.handleDebouncedScroll);
-    console.log("Created", this.$refs["slider"]);
-
-    console.log(this.$refs["slider"].children);
     this.numSlides = this.$refs["slider"].children.length;
   },
   beforeDestroy() {
@@ -122,11 +118,11 @@ export default {
 
 <style>
 .slider-wrapper {
-  width: 400px;
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: calc(400px + 2rem);
 }
 
 .slider {
@@ -137,15 +133,14 @@ export default {
 
   overflow-x: scroll;
   scroll-behavior: smooth;
-  -ms-scroll-snap-type: x mandatory;
-  scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
   scroll-padding: 0;
   display: flex;
   scrollbar-width: none;
 }
 
-::-webkit-scrollbar {
+.slider::-webkit-scrollbar {
   display: none;
 }
 
@@ -154,22 +149,9 @@ export default {
   height: 100%;
   scroll-snap-align: center;
   scroll-snap-stop: normal;
-  flex-shrink: 0;
+  flex: 100% 0 0;
 }
 
-.slide:nth-child(1),
-.slide:nth-child(4) {
-  background: #e2e2e2;
-}
-
-.slide:nth-child(2),
-.slide:nth-child(5) {
-  background: #c3c3c3;
-}
-
-.slide:nth-child(3) {
-  background: #ababab;
-}
 
 .indicator {
   display: flex;

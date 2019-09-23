@@ -1,5 +1,7 @@
 # vue-snap-slider
 
+> Warning: This Project is under heavy development! DO NOT USE!
+
 ## Project setup
 ```
 npm install
