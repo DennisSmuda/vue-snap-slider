@@ -14,6 +14,18 @@
       <div class="slide">
         <h1>2</h1>
       </div>
+      <div class="slide">
+        <h1>3</h1>
+      </div>
+      <div class="slide">
+        <h1>4</h1>
+      </div>
+      <!-- <div class="slide">
+        <h1>5</h1>
+      </div>
+      <div class="slide">
+        <h1>6</h1>
+      </div> -->
 
       <!-- TODO: Implement Custom Controls -->
       <!-- <template v-slot:controls>
@@ -64,7 +76,8 @@ header img {
   background: #c3c3c3;
 }
 
-.slide:nth-child(3) {
+.slide:nth-child(3),
+.slide:nth-child(6) {
   background: #ababab;
 }
 </style>

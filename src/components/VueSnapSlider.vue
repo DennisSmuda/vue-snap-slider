@@ -1,7 +1,7 @@
 <template>
   <div class="slider-wrapper">
     <div class="slider" ref="slider">
-      <slot></slot>
+      <slot ref="slide"></slot>
     </div>
 
     <div class="controls" v-if="showControls">
@@ -41,7 +41,7 @@
       </slot>
     </div>
 
-    <div class="indicator" v-if="showIndicators">
+    <div class="indicator" v-if="showIndicators" ref="indicators">
       <button
         class="indicator__button"
         v-for="(slideNumber, index) in numSlides"
@@ -72,11 +72,27 @@ export default {
     };
   },
   methods: {
+    setup() {},
     handleScroll() {
       const { scrollLeft, scrollWidth } = this.$refs["slider"];
-      const slideWidth = scrollWidth / this.numSlides;
+      const slideWidth = Math.floor(scrollWidth / this.numSlides);
+      this.activeSlideIndex = Math.floor(scrollLeft / slideWidth);
+    },
+    handleResize() {
+      let slideWidth;
+      if (window.innerWidth > 900) {
+        slideWidth = "33.336%";
+      } else if (window.innerWidth > 700) {
+        slideWidth = "50%";
+      } else {
+        slideWidth = "100%";
+      }
 
-      this.activeSlideIndex = scrollLeft / slideWidth;
+      console.log("Resize", this.$refs.indicators.children);
+
+      this.slides.forEach(slide => {
+        slide.style.flexBasis = slideWidth;
+      });
     },
     nextSlide() {
       this.scrollTo(this.activeSlideIndex + 1);
@@ -106,12 +122,24 @@ export default {
   },
   mounted() {
     this.handleDebouncedScroll = this.debounce(this.handleScroll, 100);
+    this.handleDebouncedResize = this.debounce(this.handleResize, 300);
+
     this.$refs["slider"].addEventListener("scroll", this.handleDebouncedScroll);
+    window.addEventListener("resize", this.handleDebouncedResize);
+
     this.numSlides = this.$refs["slider"].children.length;
+
+    this.indicators = Array.from(this.$refs.indicators.children);
+    this.slides = Array.from(this.$refs.slider.children);
   },
   beforeDestroy() {
     this.$refs["slider"].removeEventListener(
       "scroll",
+      this.handleDebouncedScroll
+    );
+
+    this.$refs["slider"].removeEventListener(
+      "resize",
       this.handleDebouncedScroll
     );
   }
@@ -124,12 +152,12 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: calc(400px + 2rem);
+  width: calc(50% + 2rem);
 }
 
 .slider {
-  width: 400px;
-  height: 100px;
+  width: 100%;
+  height: 175px;
   display: flex;
   position: relative;
 
@@ -147,11 +175,15 @@ export default {
 }
 
 .slide {
-  width: 100%;
+  /* width: 50%; */
   height: 100%;
-  scroll-snap-align: center;
+  scroll-snap-align: start;
   scroll-snap-stop: normal;
-  flex: 100% 0 0;
+  flex: 33.33334% 0 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .indicator {
