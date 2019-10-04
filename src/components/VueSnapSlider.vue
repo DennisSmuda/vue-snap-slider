@@ -88,7 +88,21 @@ export default {
         slideWidth = "100%";
       }
 
-      console.log("Resize", this.$refs.indicators.children);
+      const indicators = Array.from(this.$refs.indicators.children);
+      indicators.forEach((indicator, index) => {
+        indicator.style.display = "block";
+
+        if (
+          slideWidth === "33.336%" &&
+          (index === indicators.length - 1 || index === indicators.length - 2)
+        ) {
+          indicator.style.display = "none";
+        } else if (slideWidth === "50%" && index === indicators.length - 1) {
+          indicator.style.display = "none";
+        }
+      });
+
+      this.scrollTo(0);
 
       this.slides.forEach(slide => {
         slide.style.flexBasis = slideWidth;
