@@ -20,12 +20,12 @@
       <div class="slide">
         <h1>4</h1>
       </div>
-      <div class="slide">
+      <!-- <div class="slide">
         <h1>5</h1>
       </div>
       <div class="slide">
         <h1>6</h1>
-      </div>
+      </div> -->
 
       <!-- TODO: Implement Custom Controls -->
       <!-- <template v-slot:controls>

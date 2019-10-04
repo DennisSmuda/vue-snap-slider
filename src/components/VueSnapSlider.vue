@@ -41,7 +41,7 @@
       </slot>
     </div>
 
-    <div class="indicator" v-if="showIndicators">
+    <div class="indicator" v-if="showIndicators" ref="indicators">
       <button
         class="indicator__button"
         v-for="(slideNumber, index) in numSlides"
@@ -88,10 +88,11 @@ export default {
         slideWidth = "100%";
       }
 
-      if (window)
-        this.slides.forEach(slide => {
-          slide.style.flexBasis = slideWidth;
-        });
+      console.log("Resize", this.$refs.indicators.children);
+
+      this.slides.forEach(slide => {
+        slide.style.flexBasis = slideWidth;
+      });
     },
     nextSlide() {
       this.scrollTo(this.activeSlideIndex + 1);
@@ -126,10 +127,9 @@ export default {
     this.$refs["slider"].addEventListener("scroll", this.handleDebouncedScroll);
     window.addEventListener("resize", this.handleDebouncedResize);
 
-    // const elementsPerSlide = 2;
-
     this.numSlides = this.$refs["slider"].children.length;
-    this.elementsPerSlide = this.numSlides / 3;
+
+    this.indicators = Array.from(this.$refs.indicators.children);
     this.slides = Array.from(this.$refs.slider.children);
   },
   beforeDestroy() {
@@ -157,7 +157,7 @@ export default {
 
 .slider {
   width: 100%;
-  height: 100px;
+  height: 175px;
   display: flex;
   position: relative;
 
