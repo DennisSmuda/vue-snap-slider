@@ -166,7 +166,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: calc(50% + 2rem);
+  width: calc(100%);
 }
 
 .slider {
