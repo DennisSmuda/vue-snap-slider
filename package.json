@@ -6,7 +6,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "build-bundle": "vue-cli-service build --target lib --name vue-snap-slider ./src/components/VueSnapSlider.vue",
+    "build-bundle": "vue-cli-service build --target lib --name vue-snap-slider ./src/components/VueSnapSlider.vue --mode production",
     "lint": "vue-cli-service lint"
   },
   "files": [
