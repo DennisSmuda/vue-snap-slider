@@ -4,7 +4,7 @@
       <img alt="Snap Slider Logo" src="./assets/snap-slider-logo.png" />
     </header>
 
-    <VueSnapSlider :showControls="true" :showIndicators="true">
+    <VueSnapSlider :showControls="true" :showIndicators="true" :breakpoints="[600, 700]">
       <div class="slide">
         <h1>1</h1>
       </div>

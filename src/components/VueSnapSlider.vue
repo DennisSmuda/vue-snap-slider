@@ -63,6 +63,10 @@ export default {
     showIndicators: {
       type: Boolean,
       default: true
+    },
+    breakpoints: {
+      type: Array,
+      default: () => [700, 900]
     }
   },
   data() {
@@ -80,9 +84,9 @@ export default {
     },
     handleResize() {
       let slideWidth;
-      if (window.innerWidth > 900) {
+      if (window.innerWidth > this.breakpoints[1]) {
         slideWidth = "33.336%";
-      } else if (window.innerWidth > 700) {
+      } else if (window.innerWidth > this.breakpoints[0]) {
         slideWidth = "50%";
       } else {
         slideWidth = "100%";
@@ -90,6 +94,7 @@ export default {
 
       const indicators = Array.from(this.$refs.indicators.children);
       indicators.forEach((indicator, index) => {
+
         indicator.style.display = "block";
 
         if (
@@ -145,6 +150,9 @@ export default {
 
     this.indicators = Array.from(this.$refs.indicators.children);
     this.slides = Array.from(this.$refs.slider.children);
+    setTimeout(() => {
+      this.handleResize();
+    }, 100)
   },
   beforeDestroy() {
     this.$refs["slider"].removeEventListener(
